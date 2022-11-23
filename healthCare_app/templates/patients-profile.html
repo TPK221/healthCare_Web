@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="og:title"
+      content="Patient's Profile"
+    />
+    <title>Patient's Profile</title>
+    
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Titillium Web;
+        font-size: 16px;
+      }
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-scheme-green100);
+        background-color: var(--dl-color-scheme-yellow20);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&amp;display=swap"
+      data-tag="font"/>
+
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/patients-profile.css' %}" rel="stylesheet" />
+     <!--Header CSS-->
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
+    <!--Footer CSS-->
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    <div>
+      <div class="patients-profile-container">
+        <div class="navbar-container">
+          <div class="max-width">
+            <div class="patients-profile-logo">
+              <img alt="image" src="{% static 'public/playground_assets/group%202.svg' %}" class="patients-profile-image"/>
+              <span class="patients-profile-text brandName" href="{% url 'index' %}">
+                <span class="patients-profile-text01">TYK</span>
+                <span>&nbsp;Medical Centre</span>
+              </span>
+            </div>
+
+            <div class="patients-profile-links">
+              <p class="patients-profile-text03 navbarLink">Home</p>
+              <span class="patients-profile-text04 navbarLink">
+                Find A Doctor
+              </span>
+              <span class="patients-profile-text05 navbarLink">
+                Our Services
+              </span>
+              <span class="patients-profile-text06 navbarLink">
+                Healthcare Blog
+              </span>
+              <button class="button-secondary button patients-profile-button">
+                Log In/Register
+              </button>
+              <button class="button button-primary patients-profile-button1">
+                Contact Us
+              </button>
+            </div>
+            <div class="patients-profile-burger-menu navbar-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="patients-profile-icon">
+                <path
+                  d="M128 256h768v86h-768v-86zM128 554v-84h768v84h-768zM128 768v-86h768v86h-768z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="patients-profile-hero">
+          <div class="patients-profile-container01">
+            <h1 class="patients-profile-text07">Patient's Profile&nbsp;</h1>
+          </div>
+        </div>
+        <h1 class="patients-profile-text08">Patient's Personal Information</h1>
+        <div class="patients-profile-container02">
+          <span class="patients-profile-text09">
+            <span>Full Name:</span>
+            <br />
+            <br />
+            <span>Email:</span>
+            <br />
+            <br />
+            <span>Phone Number:</span>
+            <br />
+            <br />
+            <span>Date of Birth:</span>
+            <br />
+            <br />
+            <span>Gender:</span>
+            <br />
+            <br />
+          </span>
+        </div>
+        <h1 class="patients-profile-text25">Appointment Details</h1>
+        <div class="patients-profile-container03">
+          <span class="patients-profile-text26">
+            <span>Date:</span>
+            <br />
+            <br />
+            <span>Requested Appointment With:</span>
+            <br />
+            <br />
+            <span>Date Option 1:</span>
+            <br />
+            <br />
+            <span>Date Option 2:</span>
+            <br />
+            <br />
+            <span>Medical Concerns:</span>
+            <br />
+          </span>
+          <button
+            class="patients-profile-button2 button-secondary button"
+          >
+            Cancel Appointment
+          </button>
+        </div>
+
+
+    <footer class="footer-container">
+      <div class="footer-links-container">
+        <div class="footer-content-container">
+          <div class="footer-column">
+            <a class="footer-text-title">Home</a>
+            <a class="footer-text" href="{% url 'index' %}">Home</a>
+            <a class="footer-text" href="{% url 'find-a-doctor' %}">Find a Doctor</a>
+            <a class="footer-text" href="{% url 'our-services' %}">Our Services</a>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">Healthcare Blog</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Find a Doctor</span>
+            <a class="footer-text" href="{% url 'find-a-doctor' %}">Make an appointment</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Our Services</span>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              <span>Physical Therapy and Rehabilitation Services</span>
+              <br />
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Home Nursing Services
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Mental Health Services
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Prescription Services
+            </a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Healthcare Blog</span>
+            <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
+              Latest COVID-19 Information
+            </a>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">
+              Latest TYK Medical Centre
+            </a>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">
+              Free Resources for Health
+            </a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Contact</span>
+            <span class="footer-text">+0391191100</span>
+            <span class="footer-text">
+              Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
+            </span>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Follow</span>
+            <span class="footer-text">Instagram</span>
+            <span class="footer-text">Twitter</span>
+            <span class="footer-text">Facebook</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+      </div>
+    </div>
+    <script>
+      window.onload = () => {
+        const runAllScripts = () => {
+          initializeAllAccordions()
+        }
+
+        const listenForUrlChanges = () => {
+          let url = location.href
+          document.body.addEventListener(
+            'click',
+            () => {
+              requestAnimationFrame(() => {
+                if (url !== location.href) {
+                  runAllScripts()
+                  url = location.href
+                }
+              })
+            },
+            true
+          )
+        }
+
+        const initializeAllAccordions = () => {
+          const allAccordions = document.querySelectorAll('[data-role="Accordion"]');
+
+          allAccordions.forEach((accordion) => {
+            const accordionHeader = accordion.querySelector('[data-type="accordion-header"]')
+            const accordionContent = accordion.querySelector('[data-type="accordion-content"]')
+
+            accordionHeader.addEventListener('click', () => {
+              if (accordionContent.style.maxHeight) {
+                accordionContent.style.maxHeight = ''
+              } else {
+                accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
+              }
+            })
+          })
+        }
+
+        listenForUrlChanges()
+        runAllScripts()
+      }
+    </script>
+  </body>
+</html>
