@@ -17,7 +17,8 @@ firebaseConfig = {
     'messagingSenderId': "229559686647",
     'appId': "1:229559686647:web:a93fd4e466a9f2adb80af2",
     'measurementId': "G-WM3FSPBPDV",
-    'serviceAccount': "C:\\Users\\tript\\Desktop\\University Year 2 Sem 6\\Semester 6 Sept 2022\\Internet & Web Development\\health-care-web-212e0-firebase-adminsdk-nyf5g-9ba2dd4249.json"}
+    'serviceAccount': "C:\\Users\\tript\\Desktop\\University Year 2 Sem 6\\Semester 6 Sept 2022\\Internet & Web Development\\health-care-web-212e0-firebase-adminsdk-nyf5g-9ba2dd4249.json"
+    }
 
 # Initialize Firebase
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -338,3 +339,7 @@ def logout(request):
     except KeyError:
         pass
     return render(request, "index.html")
+
+def patientsProfile(request):
+    context = {'usrDetail': userDetail}
+    return render(request, "patients-profile.html", context)

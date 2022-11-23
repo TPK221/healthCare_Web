@@ -15,4 +15,5 @@ urlpatterns = [
     path('about-us/', views.aboutus, name="about-us"),
     path('doctors-information/', views.doctorsInformation, name="doctors-information"),
     path('make-appointment/', views.makeAppointment, name="make-appointment"),
+    path('patients-profile/', views.patientsProfile, name="patients-profile"),
 ]
