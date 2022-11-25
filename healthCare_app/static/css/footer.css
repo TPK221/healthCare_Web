@@ -118,12 +118,17 @@ html, body{
     min-height: auto;
     align-items: center;
     justify-content: space-between;
+    
+    
   }
 
   .footer-links-container {
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-evenly;
+    width: auto;
+    
+    
   }
 
   .footer-content-container {
@@ -136,5 +141,7 @@ html, body{
     padding-right: var(--dl-space-space-unit);
     padding-bottom: 0px;
     justify-content: space-evenly;
+    
+   
   }
 }

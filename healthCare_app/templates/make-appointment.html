@@ -37,8 +37,13 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   <link href="{% static 'css/make-appointment.css' %}" type="text/css" rel="stylesheet" />
+  <!--Header CSS-->
   <link href="{% static 'css/navbar.css' %}" type="text/css" rel="stylesheet" />
+  <!--Footer CSS-->
   <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
+  <!--Chatbot CSS-->
+  <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -190,7 +195,7 @@
           </ul>
         </li>
         {% else %}
-        <li><a href="{% url 'register' %}" class="btn-register">Log In / Register</a></li>
+        <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
         {% endif %}
 
         <li>
@@ -382,6 +387,7 @@
             <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
               Latest COVID-19 Information
             </a>
+            <br>
             <a class="footer-text" href="{% url 'healthcare-blog' %}">
               Latest TYK Medical Centre
             </a>
@@ -391,9 +397,12 @@
           </div>
           <div class="footer-column">
             <span class="footer-text-title">Contact</span>
-            <span class="footer-text">+0391191100</span>
+            <span class="footer-text">+03-91191100</span>
             <span class="footer-text">
               Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
+            </span>
+            <span class="footer-text">
+              Email : tykmedicalcentre@gmail.com
             </span>
           </div>
           <div class="footer-column">
@@ -509,6 +518,55 @@
     });
   </script>
 
+   <!-- CHAT BAR BLOCK -->
+   <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+        <div class="full-chat-block">
+            <!-- Message Container -->
+            <div class="outer-container">
+                <div class="chat-container">
+                    <!-- Messages -->
+                    <div id="chatbox">
+                        <h5 id="chat-timestamp"></h5>
+                        <br>
+                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        <br>
+                    </div>
+
+                    <!-- User input box -->
+                    <div class="chat-bar-input-block">
+                        <div id="userInput">
+                            <input id="textInput" class="input-box" type="text" name="msg"
+                                placeholder="Click 'Enter' to send a message">
+                            <p></p>
+                        </div>
+
+                        <div class="chat-bar-icons">
+
+                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                onclick="sendButton()"></i>
+                        </div>
+                    </div>
+
+                    <div id="chat-bar-bottom">
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </div>
+
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static 'js/responses.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
 
 </html>

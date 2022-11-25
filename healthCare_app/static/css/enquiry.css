@@ -215,10 +215,10 @@
   font-size: 22px;
   align-self: center;
   margin-top: var(--dl-space-space-fiveunits);
-  padding-top: var(--dl-space-space-oneandhalfunits);
-  padding-left: var(--dl-space-space-twounits);
-  padding-right: var(--dl-space-space-twounits);
-  padding-bottom: var(--dl-space-space-oneandhalfunits);
+  padding-top: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 10px;
   background-color: var(--dl-color-scheme-green100);
 }
 
@@ -290,10 +290,10 @@
     align-self: center;
     margin-top: var(--dl-space-space-fourunits);
     margin-left: 0px;
-    padding-top: var(--dl-space-space-unit);
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-    padding-bottom: var(--dl-space-space-unit);
+    padding-top: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
     background-color: var(--dl-color-scheme-green100);
   }
   .enquiry-text12 {

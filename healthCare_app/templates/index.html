@@ -139,6 +139,9 @@
   <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
   <!--Footer CSS-->
   <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
+  <!--Chatbot CSS-->
+  <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -157,7 +160,7 @@
       <label for="btn" class="icon">
         <span class="fa fa-bars"></span>
       </label>
-
+      <!--Header-->
       <input type="checkbox" id="btn">
       <ul>
         <li><a href="{% url 'index' %}" class="navbar-text">Home</a></li>
@@ -175,7 +178,7 @@
           </ul>
         </li>
         {% else %}
-        <li><a href="{% url 'register' %}" class="btn-register">Log In / Register</a></li>
+        <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
         {% endif %}
 
         <li>
@@ -186,6 +189,7 @@
       </ul>
     </nav>
 
+    <!--Body-->
     <div class="home-hero hero-container section-container">
       <div class="home-max-width1 max-width">
         <div class="home-content">
@@ -233,9 +237,9 @@
           <h1 class="home-text17">About Us</h1>
           <span class="home-text18">
             <span class="home-text19">
-              TYK Medical Centre was established in September of 2022 in
+              TYK Medical Centre was established in September of 2022 at
               Jalan Gasing Selatan, Selangor, Malaysia. We are one of the
-              newest medical center in the country and we provide all types
+              newest medical centre in the country and we provide all types
               of services for everyone.&nbsp;
             </span>
             <br class="home-text20" />
@@ -316,7 +320,7 @@
               <span class="home-text34">3</span>
             </div>
             <div class="home-container06">
-              <span class="home-title3">Create an appointment</span>
+              <span class="home-title3">Create an Appointment</span>
               <span class="home-text35">
                 The final step is to find an available time and date and
                 make an appointment.
@@ -465,7 +469,7 @@
             class="home-image5" />
         </div>
         <div class="home-banner">
-          <span class="home-text68">Ask us anything health related.</span>
+          <span class="home-text68">Ask us anything health related</span>
           <h1 class="home-text69">Make an Enquiry</h1>
           <div class="home-btns">
             <a class="home-button5 button button-gradient" href="{% url 'enquiry' %}">
@@ -478,6 +482,7 @@
 
     <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
     
+    <!--Footer-->
     <footer class="footer-container">
       <div class="footer-links-container">
         <div class="footer-content-container">
@@ -513,6 +518,7 @@
             <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
               Latest COVID-19 Information
             </a>
+            <br>
             <a class="footer-text" href="{% url 'healthcare-blog' %}">
               Latest TYK Medical Centre
             </a>
@@ -522,9 +528,12 @@
           </div>
           <div class="footer-column">
             <span class="footer-text-title">Contact</span>
-            <span class="footer-text">+0391191100</span>
+            <span class="footer-text">+03-91191100</span>
             <span class="footer-text">
               Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
+            </span>
+            <span class="footer-text">
+              Email : tykmedicalcentre@gmail.com
             </span>
           </div>
           <div class="footer-column">
@@ -599,6 +608,54 @@
       }
   </script>
 
+  <!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+        <div class="full-chat-block">
+            <!-- Message Container -->
+            <div class="outer-container">
+                <div class="chat-container">
+                    <!-- Messages -->
+                    <div id="chatbox">
+                        <h5 id="chat-timestamp"></h5>
+                        <br>
+                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        <br>
+                    </div>
+
+                    <!-- User input box -->
+                    <div class="chat-bar-input-block">
+                        <div id="userInput">
+                            <input id="textInput" class="input-box" type="text" name="msg"
+                                placeholder="Click 'Enter' to send a message">
+                            <p></p>
+                        </div>
+
+                        <div class="chat-bar-icons">
+
+                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                onclick="sendButton()"></i>
+                        </div>
+                    </div>
+
+                    <div id="chat-bar-bottom">
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static 'js/responses.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
 
 </html>

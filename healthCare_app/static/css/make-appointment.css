@@ -157,3 +157,65 @@
   margin-right: auto;
   width: 30%;
 }
+
+@media(max-width: 767px) {
+  .input-label {
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 550;
+    padding-bottom: 10px;
+    margin-left: 10px;
+  }
+  .select-doctor {
+    width: 730px;
+    height: 50px;
+    border: 1px solid gainsboro;
+    padding: 0 10px 0 15px;
+    background-color: white;
+    margin-left: 10px;
+  }
+  .info-appointment {
+    width: 300px;
+    height: 50px;
+    background-color: ghostwhite;
+    border: 1px solid gainsboro;
+    padding-left: 15px;
+    margin-left: 10px;
+  }
+  .form-control{
+    width: 730px;
+    margin-left: 10px;
+  }
+
+  .info-patient {
+    width: 350px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid gainsboro;
+    padding-left: 15px;
+    margin-left: 10px;
+  }
+  
+  .info-patient-name {
+    width: 730px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid gainsboro;
+    padding-left: 15px;
+    margin-left: 10px;
+  }
+  
+  .select-date-container {
+    display: flex;
+    column-gap: 20px;
+    width: 300px;
+  }
+  
+  .input-label {
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 550;
+    padding-bottom: 10px;
+    
+  }
+}

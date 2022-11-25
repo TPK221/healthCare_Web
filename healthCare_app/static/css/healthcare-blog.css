@@ -726,7 +726,7 @@
 }
 @media(max-width: 500px) {
   .healthcare-blog-hero {
-    height: 236px;
+    height: 400px;
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);

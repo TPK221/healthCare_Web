@@ -569,7 +569,7 @@
   padding: 0;
 }
 .home-max-width6 {
-  height: 1128px;
+  height: 1200px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -589,6 +589,7 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  
 }
 .home-text55 {
   color: var(--dl-color-scheme-green80);
@@ -1171,4 +1172,7 @@
     padding-bottom: 10px;
   }
 
+  .footer-links-container{
+    
+  }
 }

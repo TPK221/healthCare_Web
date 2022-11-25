@@ -106,6 +106,7 @@
   display: grid;
   grid-gap: var(--dl-space-space-twounits);
   grid-template-columns: 1fr 1fr;
+  height: auto;
 }
 .our-services-feature-card {
   width: 1035px;
@@ -115,6 +116,7 @@
   align-items: flex-start;
   flex-direction: row;
   justify-content: flex-start;
+  height: auto;
 }
 .our-services-container03 {
   width: 960px;
@@ -122,6 +124,7 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
+  height: auto;
 }
 .our-services-text012 {
   font-size: 1.6rem;
@@ -751,7 +754,7 @@
     width: 100%;
   }
   .our-services-container06 {
-    width: 415px;
+    width: 455px;
     flex-direction: column;
   }
   .our-services-container07 {

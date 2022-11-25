@@ -121,6 +121,7 @@
 
     }
   </style>
+
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
     data-tag="font" />
@@ -137,8 +138,13 @@
   <!-- CSS Link -->
   <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
   <link href="{% static 'css/find-a-doctor.css' %}" rel="stylesheet" />
+  <!--Header CSS-->
   <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
+  <!--Footer CSS-->
   <link href="{% static 'css/footer.css' %}" rel="stylesheet" />
+   <!--Chatbot CSS-->
+   <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <style>
@@ -192,7 +198,7 @@
         <label for="btn" class="icon">
           <span class="fa fa-bars"></span>
         </label>
-
+        <!--Header-->
         <input type="checkbox" id="btn">
         <ul>
           <li><a href="{% url 'index' %}" class="navbar-text">Home</a></li>
@@ -210,7 +216,7 @@
             </ul>
           </li>
           {% else %}
-          <li><a href="{% url 'register' %}" class="btn-register">Log In / Register</a></li>
+          <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
           {% endif %}
 
           <li>
@@ -221,6 +227,7 @@
         </ul>
       </nav>
 
+      <!--Body-->
       <div class="find-a-doctor-hero">
         <h1 class="find-a-doctor-text007">
           <span>Find A Doctor</span>
@@ -231,7 +238,7 @@
 
       <div class="find-a-doctor-banner" id="down">
         <select class="find-a-doctor-select" name="specialties" id="specialties">
-          <option value="0">Specialty</option>
+          <option value="0">Specialities</option>
           {% for specialtyList, title, imgUrl in combineList %}
           <option value="{{specialtyList}}">{{title}}</option>
           {% endfor %}
@@ -257,6 +264,7 @@
 
       <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
 
+      <!--Footer-->
       <footer class="footer-container">
         <div class="footer-links-container">
           <div class="footer-content-container">
@@ -292,6 +300,7 @@
               <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
                 Latest COVID-19 Information
               </a>
+              <br>
               <a class="footer-text" href="{% url 'healthcare-blog' %}">
                 Latest TYK Medical Centre
               </a>
@@ -301,9 +310,12 @@
             </div>
             <div class="footer-column">
               <span class="footer-text-title">Contact</span>
-              <span class="footer-text">+0391191100</span>
+              <span class="footer-text">+03-91191100</span>
               <span class="footer-text">
                 Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
+              </span>
+              <span class="footer-text">
+                Email : tykmedicalcentre@gmail.com
               </span>
             </div>
             <div class="footer-column">
@@ -469,7 +481,55 @@
     });
   </script>
 
+  <!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+        <div class="full-chat-block">
+            <!-- Message Container -->
+            <div class="outer-container">
+                <div class="chat-container">
+                    <!-- Messages -->
+                    <div id="chatbox">
+                        <h5 id="chat-timestamp"></h5>
+                        <br>
+                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        <br>
+                    </div>
+
+                    <!-- User input box -->
+                    <div class="chat-bar-input-block">
+                        <div id="userInput">
+                            <input id="textInput" class="input-box" type="text" name="msg"
+                                placeholder="Click 'Enter' to send a message">
+                            <p></p>
+                        </div>
+
+                        <div class="chat-bar-icons">
+
+                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                onclick="sendButton()"></i>
+                        </div>
+                    </div>
+
+                    <div id="chat-bar-bottom">
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static 'js/responses.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
 
 </html>
 

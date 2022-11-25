@@ -76,6 +76,7 @@
   margin-top: var(--dl-space-space-twounits);
   text-align: center;
   margin-bottom: var(--dl-space-space-twounits);
+  font-size: 18px;
 }
 .about-us-banner {
   width: 100%;
@@ -90,6 +91,8 @@
   margin-top: var(--dl-space-space-twounits);
   text-align: center;
   margin-bottom: var(--dl-space-space-twounits);
+  font-size: 18px;
+  line-height: normal;
 }
 .about-us-gallery {
   width: 100%;
@@ -499,6 +502,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 .about-us-text15 {
   font-size: 3rem;
@@ -917,6 +921,9 @@
     width: 100%;
     justify-content: space-between;
   }
+  .about-us-text08 {
+    font-size: 16px;
+  }
 }
 @media(max-width: 500px) {
   .about-us-hero {
@@ -939,7 +946,7 @@
     grid-template-columns: 1fr;
   }
   .about-us-banner1 {
-    height: 709px;
+    height: 700px;
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
@@ -949,6 +956,7 @@
     height: 787px;
     padding: var(--dl-space-space-unit);
     margin-bottom: 0px;
+   
   }
   .about-us-links-container {
     align-items: flex-start;
@@ -959,5 +967,11 @@
     align-items: flex-start;
     margin-right: 0px;
     justify-content: space-between;
+  }
+  .about-us-text08 {
+    font-size: 16px;
+  }
+  .about-us-text14 {
+    font-size: 16px;
   }
 }
