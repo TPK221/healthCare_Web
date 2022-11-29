@@ -51,20 +51,17 @@
   height: 24px;
 }
 .our-services-hero {
-  width: auto;
+  width: 100%;
   height: 437px;
   display: flex;
-  max-width: auto;
-  min-height: auto;
   align-items: center;
   padding-top: var(--dl-space-space-oneandhalfunits);
   padding-left: var(--dl-space-space-oneandhalfunits);
   padding-right: var(--dl-space-space-oneandhalfunits);
   flex-direction: row;
-  padding-bottom: OneAn0dHalfUnits;
-  justify-content: space-between;
   background-color: var(--dl-color-scheme-green100);
 }
+
 .our-services-container01 {
   display: flex;
   margin-left: 150px;
@@ -76,7 +73,7 @@
 .our-services-text007 {
   color: var(--dl-color-scheme-orange100);
   font-size: 3rem;
-  max-width: 450px;
+  max-width: 450px;home-section1
 }
 .our-services-text010 {
   color: var(--dl-color-scheme-yellow20);
@@ -93,8 +90,8 @@
   width: 100%;
   display: flex;
   padding: var(--dl-space-space-threeunits);
-  max-width: var(--dl-size-size-maxwidth);
   flex-direction: column;
+  align-items: center;
 }
 .our-services-text011 {
   font-size: 2.5rem;
@@ -108,16 +105,7 @@
   grid-template-columns: 1fr 1fr;
   height: auto;
 }
-.our-services-feature-card {
-  width: 1035px;
-  display: flex;
-  padding: var(--dl-space-space-unit);
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: auto;
-}
+
 .our-services-container03 {
   width: 960px;
   display: flex;
@@ -165,19 +153,18 @@
 }
 
 .our-services-container04 {
-  width: 960px;
+  width: 100%;
+  justify-content: center;
   display: grid;
   grid-gap: var(--dl-space-space-twounits);
-  grid-template-columns: 1fr 1fr;
 }
 .our-services-feature-card1 {
   width: 1035px;
   display: flex;
   padding: var(--dl-space-space-unit);
   position: relative;
-  align-items: flex-start;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .our-services-container05 {
   width: 960px;
@@ -200,15 +187,6 @@
   display: grid;
   grid-gap: var(--dl-space-space-twounits);
   grid-template-columns: 1fr 1fr;
-}
-.our-services-feature-card2 {
-  width: 1035px;
-  display: flex;
-  padding: var(--dl-space-space-unit);
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
 }
 .our-services-container07 {
   width: 960px;
@@ -234,15 +212,7 @@
   font-style: normal;
   font-weight: 600;
 }
-.our-services-feature-card3 {
-  width: 1035px;
-  display: flex;
-  padding: var(--dl-space-space-unit);
-  position: relative;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-}
+
 .our-services-container08 {
   width: 960px;
   display: flex;
@@ -259,11 +229,6 @@
   font-size: 18px;
   text-align: justify;
 }
-.our-services-section {
-  height: 300px;
-  padding-top: 0px;
-  padding-bottom: var(--dl-space-space-halfunit);
-}
 
 
 
@@ -271,10 +236,9 @@
   .our-services-container01 {
     width: 50%;
   }
-  .our-services-section {
-    height: 394px;
-  }
 }
+
+
 @media(max-width: 991px) {
   .our-services-text003 {
     margin-right: var(--dl-space-space-unit);
@@ -334,9 +298,6 @@
     align-self: flex-end;
 
   }
-  .our-services-feature-card {
-    width: 900px;
-  }
 
   .our-services-container02{
     width: 800px;
@@ -353,11 +314,9 @@
     justify-content: flex-start;
   }
   .our-services-container04{
-    width: 800px;
+    width: 100%;
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
   }
   .our-services-container05{
     width: 800px;
@@ -406,15 +365,6 @@
   .our-services-feature-card1 {
     width: 905px;
     padding-right: 38px;
-  }
-  .our-services-feature-card2 {
-    width: 906px;
-    margin-right: 0px;
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .our-services-feature-card3 {
-    width: 894px;
-    margin-right: 0px;
   }
 }
 @media(max-width: 767px) {
@@ -483,11 +433,10 @@
     justify-content: flex-start;
   }
   .our-services-container04{
-    width: 650px;
+    width: 100%;
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
+
   }
   .our-services-container05{
     width: 650px;
@@ -516,10 +465,6 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: flex-start;
-  }
-  .our-services-feature-card {
-    width: 700px;
-    flex-direction: row;
   }
 
   .our-services-text012 {
@@ -551,10 +496,7 @@
   .our-services-container06 {
     grid-template-columns: 1fr;
   }
-  .our-services-feature-card2 {
-    width: 700px;
-    flex-direction: row;
-  }
+
   .our-services-container07 {
     flex-direction: column;
   }
@@ -566,10 +508,6 @@
     text-align: justify;
     line-height: 1.2;
   }
-  .our-services-feature-card3 {
-    width: 700px;
-    flex-direction: row;
-  }
   .our-services-container08 {
     flex-direction: column;
   }
@@ -580,9 +518,6 @@
     font-size: 15px;
     text-align: justify;
     line-height: 1.2;
-  }
-  .our-services-section {
-    height: 519px;
   }
 }
 
@@ -630,11 +565,9 @@
     justify-content: flex-start;
   }
   .our-services-container04{
-    width: 500px;
+    width: 100%;
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
   }
   .our-services-container05{
     width: 500px;
@@ -677,10 +610,7 @@
     font-size: 1.4rem;
     margin-bottom: var(--dl-space-space-unit);
   }
-  .our-services-feature-card {
-    width: 448px;
-    margin-right: 0px;
-  }
+
   .our-services-container02 {
     width: 100%;
     position: relative;
@@ -730,7 +660,7 @@
     padding-right: 0px;
   }
   .our-services-container04 {
-    width: 430px;
+    width: 100%;
     flex-direction: column;
   }
   .our-services-container05 {
@@ -749,9 +679,6 @@
     font-size: 13px;
     align-self: flex-start;
     text-align: justify;
-  }
-  .our-services-feature-card2 {
-    width: 100%;
   }
   .our-services-container06 {
     width: 455px;
@@ -774,9 +701,6 @@
     align-self: flex-start;
     text-align: justify;
   }
-  .our-services-feature-card3 {
-    width: 448px;
-  }
   .our-services-container08 {
     flex-direction: column;
   }
@@ -790,9 +714,5 @@
     font-size: 13px;
     align-self: flex-start;
     text-align: justify;
-  }
-  .our-services-section {
-    height: 789px;
-    margin-bottom: 0px;
   }
 }

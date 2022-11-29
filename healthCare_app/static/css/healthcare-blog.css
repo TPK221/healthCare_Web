@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .healthcare-blog-container02 {
   border: 2px dashed rgba(120, 120, 120, 0.4);
@@ -517,6 +517,8 @@
     padding-right: var(--dl-space-space-twounits);
   }
 }
+
+
 @media(max-width: 767px) {
   .healthcare-blog-text001 {
     color: var(--dl-color-scheme-orange100);

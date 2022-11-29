@@ -103,6 +103,7 @@
       scroll-behavior: smooth
     }
   </style>
+
   <style data-tag="default-style-sheet">
     html {
       font-family: Titillium Web;
@@ -118,9 +119,9 @@
       line-height: 1.15;
       color: var(--dl-color-scheme-green100);
       background-color: var(--dl-color-scheme-yellow20);
-
     }
   </style>
+
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
     data-tag="font" />
@@ -144,257 +145,263 @@
 </head>
 
 <body>
-  <div>
-    <div class="our-services-container">
+  <div class="our-services-container section-container">
 
-      <nav>
-        <div class="navbar-logo">
-          <img alt="image" src="{% static 'public/playground_assets/group_2.svg' %}" class="navbar-image" />
-          <a class="brand-Name" href="{% url 'index' %}">
-            <span class="navbar-text01">TYK</span>
-            <span>Medical Centre</span>
-          </a>
-        </div>
-
-        <!-- Hamburger Menu Icon -->
-        <label for="btn" class="icon">
-          <span class="fa fa-bars"></span>
-        </label>
-        <!--Header-->
-        <input type="checkbox" id="btn">
-        <ul>
-          <li><a href="{% url 'index' %}" class="navbar-text">Home</a></li>
-          <li><a href="{% url 'find-a-doctor' %}" class="navbar-text">Find A Doctor</a></li>
-          <li><a href="{% url 'our-services' %}" class="navbar-text">Our Services</a></li>
-          <li><a href="{% url 'healthcare-blog' %}" class="navbar-text">Healthcare Blog</a></li>
-
-          {% if 'uid' in request.session %}
-          <li>
-            <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
-            <input type="checkbox" id="btn-1" class="checkBtn">
-            <ul>
-              <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
-            </ul>
-          </li>
-          {% else %}
-          <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
-          {% endif %}
-
-          <li>
-            <label for="btn-2" class="show">Contact Us</label>
-            <a href="https://wa.me/message/FDT76UARAL22O1" class="btn-contactus" target="_blank">Contact Us</a>
-            <input type="checkbox" id="btn-2" onclick="parent.open('https://wa.me/message/FDT76UARAL22O1')">
-          </li>
-        </ul>
-      </nav>
-      <!--Body-->
-      <div class="our-services-hero">
-        <div class="our-services-container01">
-          <h1 class="our-services-text007">
-            <span>Our</span>
-            <span>Services</span>
-          </h1>
-          <span class="our-services-text010">
-            We are focused on serving our patients with high quality care,
-            offering a comprehensive range of medical services which includes
-            advanced medical technologies.
-          </span>
-        </div>
-        <img alt="image"
-          src="https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDEzfHxtZWRpY2FsJTIwc2VydmljZXN8ZW58MHx8fHwxNjY3NDc0NDU0&amp;ixlib=rb-4.0.3&amp;w=500"
-          class="our-services-image1" />
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="navbar-logo">
+        <img alt="image" src="{% static 'public/playground_assets/group_2.svg' %}" class="navbar-image" />
+        <a class="brand-Name" href="{% url 'index' %}">
+          <span class="navbar-text01">TYK</span>
+          <span>Medical Centre</span>
+        </a>
       </div>
-      <div class="our-services-features">
-        <h1 class="our-services-text011">All these impressive services</h1>
-        <div class="our-services-container02">
-          <div class="our-services-feature-card">
-            <div class="our-services-container03">
-              <h2 class="our-services-text012">
-                Physical Therapy and Rehabilitation Services
-              </h2>
-              <span class="our-services-text013">
-                <span>
-                  We provide this service if patients are recovering from
-                  surgery, healing from an injury, or being treated for a
-                  disabling health problem.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Many health problems that cause pain or limit your ability
-                  to move normally may be helped by physical
-                  therapy.&nbsp;Here are some health problems that it may
-                  help:
-                </span>
-                <br />
-                <br />
-                <span class="our-services-text020">Stroke.</span>
-                <span class="our-services-text021"></span>
-                <span>
-                  Stroke is a block or burst of the blood supply to the brain.
-                  The most important part of stroke recovery is early rehab
-                  that often starts right away in the hospital. Rehab can help
-                  you relearn how to manage daily activities. It can also help
-                  you get back lost function and prevent more damage.
-                </span>
-                <br />
-                <br />
-                <span class="our-services-text025">Spine injury.</span>
-                <span class="our-services-text026"></span>
-                <span>
-                  Neck and back injuries need early treatment for the best
-                  results. Physical therapy and rehab for these injuries start
-                  as soon as possible at the hospital. They help limit more
-                  damage and shorten recovery time.
-                </span>
-                <br />
-                <br />
-                <span class="our-services-text030">Pain.</span>
-                <span class="our-services-text031"></span>
-                <span>
-                  If you have severe pain in the hospital after an injury or
-                  an operation or because of a nerve or muscle problem,
-                  physical therapy may help ease your pain. It can also help
-                  you to better handle it.
-                </span>
-                <br />
-                <br />
-                <span class="our-services-text035">Joint conditions.</span>
-                <span>
-                  Joint problems can cause pain, stiffness, and limited
-                  movement. They may be treated with physical therapy in the
-                  hospital. Therapy can ease pain and improve range of
-                  movement. It can also teach you how to use your joints
-                  without causing more damage. Examples of these conditions
-                  are ankylosing spondylitis, osteoarthritis, rheumatoid
-                  arthritis, and gout.
-                </span>
-                <br />
-                <br />
+
+      <!-- Hamburger Menu Icon -->
+      <label for="btn" class="icon">
+        <span class="fa fa-bars"></span>
+      </label>
+
+      <!--Header-->
+      <input type="checkbox" id="btn">
+      <ul>
+        <li><a href="{% url 'index' %}" class="navbar-text">Home</a></li>
+        <li><a href="{% url 'find-a-doctor' %}" class="navbar-text">Find A Doctor</a></li>
+        <li><a href="{% url 'our-services' %}" class="navbar-text">Our Services</a></li>
+        <li><a href="{% url 'healthcare-blog' %}" class="navbar-text">Healthcare Blog</a></li>
+
+        {% if 'uid' in request.session %}
+        <li>
+          <label for="btn-1" class="show">{{ usrDetail.name }}</label>
+          <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
+          <input type="checkbox" id="btn-1" class="checkBtn">
+          <ul>
+            <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
+        {% endif %}
+
+        <li>
+          <label for="btn-2" class="show">Contact Us</label>
+          <a href="https://wa.me/message/FDT76UARAL22O1" class="btn-contactus" target="_blank">Contact Us</a>
+          <input type="checkbox" id="btn-2" onclick="parent.open('https://wa.me/message/FDT76UARAL22O1')">
+        </li>
+      </ul>
+    </nav>
+
+    <!--Body-->
+    <div class="our-services-hero">
+      <div class="our-services-container01">
+        <h1 class="our-services-text007">
+          <span>Our</span>
+          <span>Services</span>
+        </h1>
+        <span class="our-services-text010">
+          We are focused on serving our patients with high quality care,
+          offering a comprehensive range of medical services which includes
+          advanced medical technologies.
+        </span>
+      </div>
+      <img alt="image"
+        src="https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDEzfHxtZWRpY2FsJTIwc2VydmljZXN8ZW58MHx8fHwxNjY3NDc0NDU0&amp;ixlib=rb-4.0.3&amp;w=500"
+        class="our-services-image1" />
+    </div>
+    <div class="our-services-features">
+      <h1 class="our-services-text011">All these impressive services</h1>
+      <div class="our-services-container04">
+        <div class="our-services-feature-card1">
+          <div class="our-services-container03">
+            <h2 class="our-services-text012">
+              Physical Therapy and Rehabilitation Services
+            </h2>
+            <span class="our-services-text013">
+              <span>
+                We provide this service if patients are recovering from
+                surgery, healing from an injury, or being treated for a
+                disabling health problem.
               </span>
-            </div>
+              <br />
+              <br />
+              <span>
+                Many health problems that cause pain or limit your ability
+                to move normally may be helped by physical
+                therapy.&nbsp;Here are some health problems that it may
+                help:
+              </span>
+              <br />
+              <br />
+              <span class="our-services-text020">Stroke.</span>
+              <span class="our-services-text021"></span>
+              <span>
+                Stroke is a block or burst of the blood supply to the brain.
+                The most important part of stroke recovery is early rehab
+                that often starts right away in the hospital. Rehab can help
+                you relearn how to manage daily activities. It can also help
+                you get back lost function and prevent more damage.
+              </span>
+              <br />
+              <br />
+              <span class="our-services-text025">Spine injury.</span>
+              <span class="our-services-text026"></span>
+              <span>
+                Neck and back injuries need early treatment for the best
+                results. Physical therapy and rehab for these injuries start
+                as soon as possible at the hospital. They help limit more
+                damage and shorten recovery time.
+              </span>
+              <br />
+              <br />
+              <span class="our-services-text030">Pain.</span>
+              <span class="our-services-text031"></span>
+              <span>
+                If you have severe pain in the hospital after an injury or
+                an operation or because of a nerve or muscle problem,
+                physical therapy may help ease your pain. It can also help
+                you to better handle it.
+              </span>
+              <br />
+              <br />
+              <span class="our-services-text035">Joint conditions.</span>
+              <span>
+                Joint problems can cause pain, stiffness, and limited
+                movement. They may be treated with physical therapy in the
+                hospital. Therapy can ease pain and improve range of
+                movement. It can also teach you how to use your joints
+                without causing more damage. Examples of these conditions
+                are ankylosing spondylitis, osteoarthritis, rheumatoid
+                arthritis, and gout.
+              </span>
+              <br />
+              <br />
+            </span>
           </div>
         </div>
-        <div class="our-services-container04">
-          <div class="our-services-feature-card1">
-            <div class="our-services-container05">
-              <h2 class="our-services-text039">Home Nursing Services</h2>
-              <span class="our-services-text040">
-                <span>
-                  We believe that everyone has the right to live within the
-                  comforts of their own home, regardless of their health care
-                  needs.&nbsp;For those with complex care needs, private
-                  nurses oversee your care from the very beginning of your
-                  time with
-                </span>
-                <span>us. Their responsibilities include:</span>
-                <br />
-                <br />
-                <span>
-                  Completing an initial carers assessment with you alongside a
-                  local live-in care manager.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Working closely with other medical professionals involved in
-                  your care, such as social workers.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Finding a private carer that has the relevant skills and
-                  experience in your care needs.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Providing bespoke training to a chosen carer if they need
-                  upskilling for your specific health condition.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Contributing to a fully comprehensive support plan that
-                  includes medication, health condition(s), personal care, and
-                  hobbies &amp; interests.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Visits to check that your care plan is up to date and to see
-                  how you are.
-                </span>
-                <br />
+      </div>
+
+      <div class="our-services-container04">
+        <div class="our-services-feature-card1">
+          <div class="our-services-container05">
+            <h2 class="our-services-text039">Home Nursing Services</h2>
+            <span class="our-services-text040">
+              <span>
+                We believe that everyone has the right to live within the
+                comforts of their own home, regardless of their health care
+                needs.&nbsp;For those with complex care needs, private
+                nurses oversee your care from the very beginning of your
+                time with
               </span>
-            </div>
+              <span>us. Their responsibilities include:</span>
+              <br />
+              <br />
+              <span>
+                Completing an initial carers assessment with you alongside a
+                local live-in care manager.
+              </span>
+              <br />
+              <br />
+              <span>
+                Working closely with other medical professionals involved in
+                your care, such as social workers.
+              </span>
+              <br />
+              <br />
+              <span>
+                Finding a private carer that has the relevant skills and
+                experience in your care needs.
+              </span>
+              <br />
+              <br />
+              <span>
+                Providing bespoke training to a chosen carer if they need
+                upskilling for your specific health condition.
+              </span>
+              <br />
+              <br />
+              <span>
+                Contributing to a fully comprehensive support plan that
+                includes medication, health condition(s), personal care, and
+                hobbies &amp; interests.
+              </span>
+              <br />
+              <br />
+              <span>
+                Visits to check that your care plan is up to date and to see
+                how you are.
+              </span>
+              <br />
+            </span>
           </div>
         </div>
-        <div class="our-services-container06">
-          <div class="our-services-feature-card2">
-            <div class="our-services-container07">
-              <h2 class="our-services-text062">
-                Mental Health Care Services
-              </h2>
-              <span class="our-services-text063">
-                <span>
-                  We support people with mental health problems with a
-                  psychologist, therapist and a counsellor.&nbsp;TYK Medical
-                  Centre provides many evidence-based treatments that can help
-                  you to overcome the difficulties you’ve been experiencing
-                  and set you on a path to improve your wellbeing in the long
-                  term.&nbsp;Our treatment programmes are delivered by a
-                  world-class team of therapists, psychiatrists and
-                  psychologists at our network of Malaysia hospital sites and
-                  wellbeing centres. Tailored to your needs, each programme
-                  can be scaled up or down depending on the level of support
-                  needed for your recovery.
-                </span>
-                <br />
-                <br />
-                <span>Treatment programmes with us include:</span>
-                <br />
-                <br />
-                <span class="our-services-text070">
-                  Inpatient (residential)
-                </span>
-                <br />
-                <br />
-                <span>
-                  For the most intensive treatment, you can stay at one of our
-                  mental health hospitals on a residential basis. Here, you
-                  can receive round-the-clock care, expert therapy, wellbeing
-                  activities and other effective treatments that puts the
-                  focus on your recovery.&nbsp;
-                </span>
-                <span>
-                  In inpatient treatment, you’re able to recover away from the
-                  stresses of normal life and in an environment that’s
-                  specifically designed for recovery from mental health
-                  disorders.
-                </span>
-                <br />
-                <br />
-                <span class="our-services-text077">
-                  Day care and outpatient
-                </span>
-                <br />
-                <br />
-                <span>
-                  This is when you attend a hospital site or wellbeing centre
-                  for a set number of days, half-days or hourly sessions to
-                  receive mental health treatment and therapy. This type of
-                  treatment is flexible and allows you to work on your
-                  recovery around some of your other responsibilities at home
-                  and work.
-                </span>
-                <br />
+      </div>
+
+      <div class="our-services-container04">
+        <div class="our-services-feature-card1">
+          <div class="our-services-container07">
+            <h2 class="our-services-text062">
+              Mental Health Care Services
+            </h2>
+            <span class="our-services-text063">
+              <span>
+                We support people with mental health problems with a
+                psychologist, therapist and a counsellor.&nbsp;TYK Medical
+                Centre provides many evidence-based treatments that can help
+                you to overcome the difficulties you’ve been experiencing
+                and set you on a path to improve your wellbeing in the long
+                term.&nbsp;Our treatment programmes are delivered by a
+                world-class team of therapists, psychiatrists and
+                psychologists at our network of Malaysia hospital sites and
+                wellbeing centres. Tailored to your needs, each programme
+                can be scaled up or down depending on the level of support
+                needed for your recovery.
               </span>
-            </div>
+              <br />
+              <br />
+              <span>Treatment programmes with us include:</span>
+              <br />
+              <br />
+              <span class="our-services-text070">
+                Inpatient (residential)
+              </span>
+              <br />
+              <br />
+              <span>
+                For the most intensive treatment, you can stay at one of our
+                mental health hospitals on a residential basis. Here, you
+                can receive round-the-clock care, expert therapy, wellbeing
+                activities and other effective treatments that puts the
+                focus on your recovery.&nbsp;
+              </span>
+              <span>
+                In inpatient treatment, you’re able to recover away from the
+                stresses of normal life and in an environment that’s
+                specifically designed for recovery from mental health
+                disorders.
+              </span>
+              <br />
+              <br />
+              <span class="our-services-text077">
+                Day care and outpatient
+              </span>
+              <br />
+              <br />
+              <span>
+                This is when you attend a hospital site or wellbeing centre
+                for a set number of days, half-days or hourly sessions to
+                receive mental health treatment and therapy. This type of
+                treatment is flexible and allows you to work on your
+                recovery around some of your other responsibilities at home
+                and work.
+              </span>
+              <br />
+            </span>
           </div>
         </div>
-        <div class="our-services-feature-card3">
+      </div>
+
+      <div class="our-services-container04">
+        <div class="our-services-feature-card1">
           <div class="our-services-container08">
             <h2 class="our-services-text082">Dental Services</h2>
             <span class="our-services-text083">
@@ -424,73 +431,116 @@
           </div>
         </div>
       </div>
-      <div class="our-services-section section-container">
+    </div>
 
-        <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
+    <!-- Back to Top btn -->
+    <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
 
-        <!--Footer-->
-        <footer class="footer-container">
-          <div class="footer-links-container">
-            <div class="footer-content-container">
-              <div class="footer-column">
-                <a class="footer-text-title">Home</a>
-                <a class="footer-text" href="{% url 'index' %}">Home</a>
-                <a class="footer-text" href="{% url 'find-a-doctor' %}">Find a Doctor</a>
-                <a class="footer-text" href="{% url 'our-services' %}">Our Services</a>
-                <a class="footer-text" href="{% url 'healthcare-blog' %}">Healthcare Blog</a>
+    <!--Footer-->
+    <footer class="footer-container">
+      <div class="footer-links-container">
+        <div class="footer-content-container">
+          <div class="footer-column">
+            <a class="footer-text-title">Home</a>
+            <a class="footer-text" href="{% url 'index' %}">Home</a>
+            <a class="footer-text" href="{% url 'find-a-doctor' %}">Find a Doctor</a>
+            <a class="footer-text" href="{% url 'our-services' %}">Our Services</a>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">Healthcare Blog</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Find a Doctor</span>
+            <a class="footer-text" href="{% url 'find-a-doctor' %}">Make an appointment</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Our Services</span>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              <span>Physical Therapy and Rehabilitation Services</span>
+              <br />
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Home Nursing Services
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Mental Health Services
+            </a>
+            <a class="footer-text" href="{% url 'our-services' %}">
+              Prescription Services
+            </a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Healthcare Blog</span>
+            <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
+              Latest COVID-19 Information
+            </a>
+            <br>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">
+              Latest TYK Medical Centre
+            </a>
+            <a class="footer-text" href="{% url 'healthcare-blog' %}">
+              Free Resources for Health
+            </a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Contact</span>
+            <span class="footer-text">+03-91191100</span>
+            <span class="footer-text">
+              Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
+            </span>
+          </div>
+          <div class="footer-column">
+            <span class="footer-text-title">Follow</span>
+            <span class="footer-text">Instagram</span>
+            <span class="footer-text">Twitter</span>
+            <span class="footer-text">Facebook</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+      <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+      <div class="full-chat-block">
+        <!-- Message Container -->
+        <div class="outer-container">
+          <div class="chat-container">
+            <!-- Messages -->
+            <div id="chatbox">
+              <h5 id="chat-timestamp"></h5>
+              <br>
+              <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+              <br>
+            </div>
+
+            <!-- User input box -->
+            <div class="chat-bar-input-block">
+              <div id="userInput">
+                <input id="textInput" class="input-box" type="text" name="msg"
+                  placeholder="Click 'Enter' to send a message">
+                <p></p>
               </div>
-              <div class="footer-column">
-                <span class="footer-text-title">Find a Doctor</span>
-                <a class="footer-text" href="{% url 'find-a-doctor' %}">Make an appointment</a>
-              </div>
-              <div class="footer-column">
-                <span class="footer-text-title">Our Services</span>
-                <a class="footer-text" href="{% url 'our-services' %}">
-                  <span>Physical Therapy and Rehabilitation Services</span>
-                  <br />
-                </a>
-                <a class="footer-text" href="{% url 'our-services' %}">
-                  Home Nursing Services
-                </a>
-                <a class="footer-text" href="{% url 'our-services' %}">
-                  Mental Health Services
-                </a>
-                <a class="footer-text" href="{% url 'our-services' %}">
-                  Prescription Services
-                </a>
-              </div>
-              <div class="footer-column">
-                <span class="footer-text-title">Healthcare Blog</span>
-                <a class="ofooter-text" href="{% url 'healthcare-blog' %}">
-                  Latest COVID-19 Information
-                </a>
-                <br>
-                <a class="footer-text" href="{% url 'healthcare-blog' %}">
-                  Latest TYK Medical Centre
-                </a>
-                <a class="footer-text" href="{% url 'healthcare-blog' %}">
-                  Free Resources for Health
-                </a>
-              </div>
-              <div class="footer-column">
-                <span class="footer-text-title">Contact</span>
-                <span class="footer-text">+03-91191100</span>
-                <span class="footer-text">
-                  Address : No 8, Jalan Gasing Selatan, Shah Alam, 47300, Selangor, Malaysia
-                </span>
-              </div>
-              <div class="footer-column">
-                <span class="footer-text-title">Follow</span>
-                <span class="footer-text">Instagram</span>
-                <span class="footer-text">Twitter</span>
-                <span class="footer-text">Facebook</span>
+
+              <div class="chat-bar-icons">
+
+                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
               </div>
             </div>
+
+            <div id="chat-bar-bottom">
+              <p></p>
+            </div>
+
           </div>
-        </footer>
+        </div>
 
       </div>
     </div>
+
   </div>
 
   <script>
@@ -510,55 +560,12 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
+
   </script>
-   <!-- CHAT BAR BLOCK -->
-   <div class="chat-bar-collapsible">
-    <button id="chat-button" type="button" class="collapsible">Chat with us!
-        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
-    </button>
-
-    <div class="content">
-        <div class="full-chat-block">
-            <!-- Message Container -->
-            <div class="outer-container">
-                <div class="chat-container">
-                    <!-- Messages -->
-                    <div id="chatbox">
-                        <h5 id="chat-timestamp"></h5>
-                        <br>
-                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                        <br>
-                    </div>
-
-                    <!-- User input box -->
-                    <div class="chat-bar-input-block">
-                        <div id="userInput">
-                            <input id="textInput" class="input-box" type="text" name="msg"
-                                placeholder="Click 'Enter' to send a message">
-                            <p></p>
-                        </div>
-
-                        <div class="chat-bar-icons">
-
-                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-                                onclick="sendButton()"></i>
-                        </div>
-                    </div>
-
-                    <div id="chat-bar-bottom">
-                        <p></p>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-  </div>
-
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static 'js/responses.js' %}"></script>
 <script src="{% static 'js/chat.js' %}"></script>
+
 </html>

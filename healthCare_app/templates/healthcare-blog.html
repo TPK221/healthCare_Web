@@ -103,6 +103,7 @@
       scroll-behavior: smooth
     }
   </style>
+
   <style data-tag="default-style-sheet">
     html {
       font-family: Titillium Web;
@@ -144,9 +145,9 @@
 </head>
 
 <body>
-  <div>
-    <div class="healthcare-blog-container">
+    <div class="healthcare-blog-container section-container">
 
+      <!-- Navigation Bar -->
       <nav>
         <div class="navbar-logo">
           <img alt="image" src="{% static 'public/playground_assets/group_2.svg' %}" class="navbar-image" />
@@ -155,7 +156,7 @@
             <span>Medical Centre</span>
           </a>
         </div>
-
+  
         <!-- Hamburger Menu Icon -->
         <label for="btn" class="icon">
           <span class="fa fa-bars"></span>
@@ -167,11 +168,11 @@
           <li><a href="{% url 'find-a-doctor' %}" class="navbar-text">Find A Doctor</a></li>
           <li><a href="{% url 'our-services' %}" class="navbar-text">Our Services</a></li>
           <li><a href="{% url 'healthcare-blog' %}" class="navbar-text">Healthcare Blog</a></li>
-
+  
           {% if 'uid' in request.session %}
           <li>
             <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+            <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
             <input type="checkbox" id="btn-1" class="checkBtn">
             <ul>
               <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -180,7 +181,7 @@
           {% else %}
           <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
           {% endif %}
-
+  
           <li>
             <label for="btn-2" class="show">Contact Us</label>
             <a href="https://wa.me/message/FDT76UARAL22O1" class="btn-contactus" target="_blank">Contact Us</a>
@@ -201,6 +202,7 @@
           </span>
         </div>
       </div>
+
       <div class="healthcare-blog-news1">
         <h1 class="healthcare-blog-text009">Latest COVID-19 Information</h1>
         <img alt="image"
@@ -312,6 +314,7 @@
           Source : World Health Organization
         </a>
       </div>
+
       <div class="healthcare-blog-news2">
         <h1 class="healthcare-blog-text054">
           Latest TYK Medical Centre Updates
@@ -355,6 +358,7 @@
           </span>
         </div>
       </div>
+
       <div class="healthcare-blog-pricing">
         <h1 class="healthcare-blog-text054">
           Free Resources for Health
@@ -492,25 +496,7 @@
       </footer>
 
     </div>
-  </div>
 
-  <script>
-    var btnTop = document.getElementById('btnTop');
-    window.onscroll = function () { scrollFunction() };
-
-    function scrollFunction() {
-      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        btnTop.style.display = 'block';
-      } else {
-        btnTop.style.display = 'none';
-      }
-    }
-
-    btnTop.addEventListener('click', () => {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    });
-  </script>
   <!-- CHAT BAR BLOCK -->
   <div class="chat-bar-collapsible">
     <button id="chat-button" type="button" class="collapsible">Chat with us!
@@ -556,8 +542,29 @@
     </div>
 
   </div>
+
+  <script>
+    var btnTop = document.getElementById('btnTop');
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        btnTop.style.display = 'block';
+      } else {
+        btnTop.style.display = 'none';
+      }
+    }
+
+    btnTop.addEventListener('click', () => {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+  </script>
+
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static 'js/responses.js' %}"></script>
 <script src="{% static 'js/chat.js' %}"></script>
+
 </html>
