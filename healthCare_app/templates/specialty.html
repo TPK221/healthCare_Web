@@ -122,6 +122,7 @@
 
     }
   </style>
+
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
     data-tag="font" />
@@ -143,9 +144,9 @@
 </head>
 
 <body>
-  <div>
     <div class="specialty-container">
 
+      <!-- Navigation Bar -->
       <nav>
         <div class="navbar-logo">
           <img alt="image" src="{% static 'public/playground_assets/group_2.svg' %}" class="navbar-image" />
@@ -170,7 +171,7 @@
           {% if 'uid' in request.session %}
           <li>
             <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+            <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
             <input type="checkbox" id="btn-1" class="checkBtn">
             <ul>
               <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -191,7 +192,7 @@
       <div class="specialty-hero">
         <div class="find-a-doctor-features"></div>
 
-        <h1 class="title-container">{{ title }}</h1>
+        <h1 class="title-container">{{title}}</h1>
 
         <div class="specialty-grid-container">
 
@@ -201,10 +202,10 @@
               class="doctors-information-image1" />
             <div class="doctors-information-container02">
               <br>
-              <h1 class="doctors-information-text12"><a href="{% url 'doctors-information' %}?drID={{dr.drID}}"">{{ dr.name }}</a></h1>
+              <h1 class="doctors-information-text12"><a href="{% url 'doctors-information' %}?drID={{dr.drID}}">Dr. {{ dr.name }}</a></h1>
               <br>
               <span class=" doctors-information-text13">
-                  <span class="doctor-detail">Speciality</span><span>:&emsp;{{ title }}</span>
+                  <span class="doctor-detail">Speciality</span><span>:&emsp;{{title}}</span>
                   <br />
                   <span class="doctor-detail">Languages</span><span>:&emsp;{{ dr.languages }}</span>
                   <br />
@@ -288,7 +289,7 @@
         </div>
       </div>
     </footer>
-  </div>
+
   <!-- CHAT BAR BLOCK -->
   <div class="chat-bar-collapsible">
     <button id="chat-button" type="button" class="collapsible">Chat with us!

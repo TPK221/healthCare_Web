@@ -172,7 +172,7 @@
           {% if 'uid' in request.session %}
           <li>
             <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+            <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
             <input type="checkbox" id="btn-1" class="checkBtn">
             <ul>
               <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>

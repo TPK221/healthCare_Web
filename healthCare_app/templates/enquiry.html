@@ -103,6 +103,7 @@
       scroll-behavior: smooth
     }
   </style>
+
   <style data-tag="default-style-sheet">
     html {
       font-family: Titillium Web;
@@ -171,7 +172,7 @@
           {% if 'uid' in request.session %}
           <li>
             <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+            <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
             <input type="checkbox" id="btn-1" class="checkBtn">
             <ul>
               <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -206,40 +207,44 @@
           src="https://images.unsplash.com/photo-1518384401463-d3876163c195?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDEzfHxxdWVzdGlvbnxlbnwwfHx8fDE2Njc2MzUwOTQ&amp;ixlib=rb-4.0.3&amp;w=300"
           class="enquiry-image1" />
       </div>
-      <div class="enquiry-pricing">
-        <div class="enquiry-container02">
-          <div class="enquiry-enquiry-card">
-            <h1 class="enquiry-text11">Enquiry Form</h1>
-            <div class="enquiry-container03">
-              <img alt="image"
-                src="https://images.unsplash.com/photo-1526554850534-7c78330d5f90?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fG1haWx8ZW58MHx8fHwxNjY3NjM1Njk1&amp;ixlib=rb-4.0.3&amp;h=600"
-                class="enquiry-image2" />
-              <div class="enquiry-container04">
-                <div class="enquiry-container05">
-                  <div class="enquiry-container06">
-                    <div class="enquiry-container07">
-                      <div class="enquiry-container08">
-                        <div class="enquiry-container09">
-                          <input type="text" required="" placeholder="Name" class="enquiry-textinput input" />
+
+      <form action="/enquiry/?sendMail=1" method="post" onsubmit="return submitEnquiry()">
+        {% csrf_token %}
+        <div class="enquiry-pricing">
+          <div class="enquiry-container02">
+            <div class="enquiry-enquiry-card">
+              <h1 class="enquiry-text11">Enquiry Form</h1>
+              <div class="enquiry-container03">
+                <img alt="image"
+                  src="https://images.unsplash.com/photo-1526554850534-7c78330d5f90?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fG1haWx8ZW58MHx8fHwxNjY3NjM1Njk1&amp;ixlib=rb-4.0.3&amp;h=600"
+                  class="enquiry-image2" />
+                <div class="enquiry-container04">
+                  <div class="enquiry-container05">
+                    <div class="enquiry-container06">
+                      <div class="enquiry-container07">
+                        <div class="enquiry-container08">
+                          <div class="enquiry-container09">
+                            <input type="text" id="name" name="name" placeholder="Name" class="enquiry-textinput input" />
+                          </div>
+                          <input type="text" id="email" name="email" placeholder="Email" class="enquiry-textinput1 input" />
                         </div>
-                        <input type="text" required="" placeholder="Email" class="enquiry-textinput1 input" />
+                        <input type="text" id="phone" name="phone" placeholder="Phone Number" class="enquiry-textinput2 input" />
                       </div>
-                      <input type="text" required="" placeholder="Phone Number" class="enquiry-textinput2 input" />
                     </div>
+                    <input type="text" id="message" name="message" placeholder="Message" class="enquiry-textinput3 input" />
                   </div>
-                  <input type="text" placeholder="Message" class="enquiry-textinput3 input" />
+                  <button class="enquiry-button2 button">
+                    <span class="enquiry-text12">
+                      <span class="enquiry-text13">Submit</span>
+                      <br />
+                    </span>
+                  </button>
                 </div>
-                <button class="enquiry-button2 button">
-                  <span class="enquiry-text12">
-                    <span class="enquiry-text13">Submit</span>
-                    <br />
-                  </span>
-                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
       <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
       
@@ -308,6 +313,52 @@
     </div>
   </div>
 
+  <!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+        <div class="full-chat-block">
+            <!-- Message Container -->
+            <div class="outer-container">
+                <div class="chat-container">
+                    <!-- Messages -->
+                    <div id="chatbox">
+                        <h5 id="chat-timestamp"></h5>
+                        <br>
+                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        <br>
+                    </div>
+
+                    <!-- User input box -->
+                    <div class="chat-bar-input-block">
+                        <div id="userInput">
+                            <input id="textInput" class="input-box" type="text" name="msg"
+                                placeholder="Click 'Enter' to send a message">
+                            <p></p>
+                        </div>
+
+                        <div class="chat-bar-icons">
+
+                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                onclick="sendButton()"></i>
+                        </div>
+                    </div>
+
+                    <div id="chat-bar-bottom">
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </div>
+
   <script>
     var btnTop = document.getElementById('btnTop');
     window.onscroll = function() {scrollFunction()};
@@ -324,52 +375,37 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
+  
+    function submitEnquiry() {
+      var fullName = $('#name').val();
+      var email = $('#email').val();
+      var phone = $('#phone').val();
+      var msg = $('#message').val();
+
+      if (!fullName) {
+        $('#name').focus();
+        alert("You must enter Full Name.");
+      }
+      else if (!email) {
+        alert("You must Enter Email Address.");
+        $('#email').focus();
+      }
+      else if (!phone) {
+        alert("You must Enter Phone Number.");
+        $('#phone').focus();
+      }
+      else if (!msg) {
+        alert("You must Enter a Message.");
+        $('#message').focus();
+      }
+      else{
+        alert("Enquiry Form Sent.")
+        return true;
+      }
+      return false;
+    }
   </script>
-    <!-- CHAT BAR BLOCK -->
-    <div class="chat-bar-collapsible">
-      <button id="chat-button" type="button" class="collapsible">Chat with us!
-          <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
-      </button>
-  
-      <div class="content">
-          <div class="full-chat-block">
-              <!-- Message Container -->
-              <div class="outer-container">
-                  <div class="chat-container">
-                      <!-- Messages -->
-                      <div id="chatbox">
-                          <h5 id="chat-timestamp"></h5>
-                          <br>
-                          <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                          <br>
-                      </div>
-  
-                      <!-- User input box -->
-                      <div class="chat-bar-input-block">
-                          <div id="userInput">
-                              <input id="textInput" class="input-box" type="text" name="msg"
-                                  placeholder="Click 'Enter' to send a message">
-                              <p></p>
-                          </div>
-  
-                          <div class="chat-bar-icons">
-  
-                              <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-                                  onclick="sendButton()"></i>
-                          </div>
-                      </div>
-  
-                      <div id="chat-bar-bottom">
-                          <p></p>
-                      </div>
-  
-                  </div>
-              </div>
-  
-          </div>
-      </div>
-  
-    </div>
+    
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static 'js/responses.js' %}"></script>

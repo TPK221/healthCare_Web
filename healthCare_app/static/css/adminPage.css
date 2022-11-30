@@ -1,0 +1,65 @@
+.admin-container {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title{
+  width: 100%;
+  position: relative;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.appointment-container{
+  width: 80%;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  border-bottom: 1px solid black;
+  display: flex;
+  height: auto;
+}
+
+.appointment-detail {
+  font-size: 20px;
+  width: 70%;
+  padding-left: 2em;
+}
+
+.appt-title{
+  display: inline-block;
+  width: 150px;
+}
+
+.btn-container {
+  display: block;
+  width: 30%;
+  padding-right: 3em;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.btn-style {
+  width: 150px;
+  border-color: transparent;
+  border-radius: 8px;
+  display: block;
+  font-size: 16px;
+  background: linear-gradient(90deg, #C7FF9B 0%, #FFF6A7 100%);
+  transition: 0.3s;
+  font-weight: 700;
+  padding: 13px 25px 13px 25px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 28px;
+  padding: 20px;
+}
+
+.btn-style:hover {
+  color: var(--dl-color-scheme-white);
+  background: var(--dl-color-scheme-green100);
+  border-color: var(--dl-color-scheme-green100);
+  cursor: pointer;
+}

@@ -131,8 +131,8 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&amp;display=swap"
     data-tag="font" />
-  
-    
+
+test
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
   <link href="{% static 'css/home.css' %}" rel="stylesheet" />
   <!--Header CSS-->
@@ -145,7 +145,6 @@
 </head>
 
 <body>
-
   <div class="home-container">
     <nav>
       <div class="navbar-logo">
@@ -171,14 +170,20 @@
         {% if 'uid' in request.session %}
         <li>
           <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-          <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+          <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
           <input type="checkbox" id="btn-1" class="checkBtn">
           <ul>
             <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
           </ul>
         </li>
+        <script>
+          localStorage.setItem('status', 'loggedIn');
+      </script>
         {% else %}
         <li><a href="{% url 'register' %}" class="btn-register">Log In/Register</a></li>
+        <script>
+          localStorage.setItem('status', 'loggedOut');
+      </script>
         {% endif %}
 
         <li>
@@ -226,6 +231,7 @@
         </div>
       </div>
     </div>
+
     <div class="home-section section-container">
       <div class="home-max-width2 max-width">
         <div class="home-image2">
@@ -259,6 +265,7 @@
         </div>
       </div>
     </div>
+
     <div class="home-section1 section-container">
       <div class="home-max-width3 max-width">
         <div class="home-content2">
@@ -283,6 +290,7 @@
         </div>
       </div>
     </div>
+
     <div class="home-section2 section-container">
       <div class="home-max-width4 max-width">
         <div class="home-image4">
@@ -330,6 +338,7 @@
         </div>
       </div>
     </div>
+
     <div class="home-stats">
       <div class="home-stat">
         <h1 class="home-text36">
@@ -354,6 +363,7 @@
         </span>
       </div>
     </div>
+
     <div class="home-section3 section-container">
       <span class="home-text48">
         Check out our healthcare blog where we talk about recent medical
@@ -385,7 +395,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="home-section4 section-container">
       <div class="home-max-width6 max-width">
         <div class="home-f-a-q">
@@ -481,7 +491,7 @@
     </div>
 
     <button class="btn-top" id="btnTop"><span class="fa fa-angle-up"></span></button>
-    
+
     <!--Footer-->
     <footer class="footer-container">
       <div class="footer-links-container">
@@ -548,110 +558,111 @@
 
   <script>
     var btnTop = document.getElementById('btnTop');
-    window.onscroll = function() {scrollFunction()};
+    window.onscroll = function () { scrollFunction() };
 
-    function scrollFunction (){
-      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500){
+    function scrollFunction() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
         btnTop.style.display = 'block';
       } else {
         btnTop.style.display = 'none';
       }
     }
 
-    btnTop.addEventListener('click', ()=>{
+    btnTop.addEventListener('click', () => {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
 
     window.onload = () => {
-        const runAllScripts = () => {
-          initializeAllAccordions()
-        }
+      const runAllScripts = () => {
+        initializeAllAccordions()
+      }
 
-        const listenForUrlChanges = () => {
-          let url = location.href
-          document.body.addEventListener(
-            'click',
-            () => {
-              requestAnimationFrame(() => {
-                if (url !== location.href) {
-                  runAllScripts()
-                  url = location.href
-                }
-              })
-            },
-            true
-          )
-        }
-
-        const initializeAllAccordions = () => {
-          const allAccordions = document.querySelectorAll('[data-role="Accordion"]');
-
-          allAccordions.forEach((accordion) => {
-            const accordionHeader = accordion.querySelector('[data-type="accordion-header"]')
-            const accordionContent = accordion.querySelector('[data-type="accordion-content"]')
-
-            accordionHeader.addEventListener('click', () => {
-              if (accordionContent.style.maxHeight) {
-                accordionContent.style.maxHeight = ''
-              } else {
-                accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
+      const listenForUrlChanges = () => {
+        let url = location.href
+        document.body.addEventListener(
+          'click',
+          () => {
+            requestAnimationFrame(() => {
+              if (url !== location.href) {
+                runAllScripts()
+                url = location.href
               }
             })
-          })
-        }
-
-        listenForUrlChanges()
-        runAllScripts()
+          },
+          true
+        )
       }
+
+      const initializeAllAccordions = () => {
+        const allAccordions = document.querySelectorAll('[data-role="Accordion"]');
+
+        allAccordions.forEach((accordion) => {
+          const accordionHeader = accordion.querySelector('[data-type="accordion-header"]')
+          const accordionContent = accordion.querySelector('[data-type="accordion-content"]')
+
+          accordionHeader.addEventListener('click', () => {
+            if (accordionContent.style.maxHeight) {
+              accordionContent.style.maxHeight = ''
+            } else {
+              accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
+            }
+          })
+        })
+      }
+
+      listenForUrlChanges()
+      runAllScripts()
+    }
   </script>
 
   <!-- CHAT BAR BLOCK -->
   <div class="chat-bar-collapsible">
     <button id="chat-button" type="button" class="collapsible">Chat with us!
-        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+      <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
     </button>
 
     <div class="content">
-        <div class="full-chat-block">
-            <!-- Message Container -->
-            <div class="outer-container">
-                <div class="chat-container">
-                    <!-- Messages -->
-                    <div id="chatbox">
-                        <h5 id="chat-timestamp"></h5>
-                        <br>
-                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                        <br>
-                    </div>
-
-                    <!-- User input box -->
-                    <div class="chat-bar-input-block">
-                        <div id="userInput">
-                            <input id="textInput" class="input-box" type="text" name="msg"
-                                placeholder="Click 'Enter' to send a message">
-                            <p></p>
-                        </div>
-
-                        <div class="chat-bar-icons">
-
-                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-                                onclick="sendButton()"></i>
-                        </div>
-                    </div>
-
-                    <div id="chat-bar-bottom">
-                        <p></p>
-                    </div>
-
-                </div>
+      <div class="full-chat-block">
+        <!-- Message Container -->
+        <div class="outer-container">
+          <div class="chat-container">
+            <!-- Messages -->
+            <div id="chatbox">
+              <h5 id="chat-timestamp"></h5>
+              <br>
+              <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+              <br>
             </div>
 
+            <!-- User input box -->
+            <div class="chat-bar-input-block">
+              <div id="userInput">
+                <input id="textInput" class="input-box" type="text" name="msg"
+                  placeholder="Click 'Enter' to send a message">
+                <p></p>
+              </div>
+
+              <div class="chat-bar-icons">
+
+                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+              </div>
+            </div>
+
+            <div id="chat-bar-bottom">
+              <p></p>
+            </div>
+
+          </div>
         </div>
+
+      </div>
     </div>
 
   </div>
+
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static 'js/responses.js' %}"></script>
 <script src="{% static 'js/chat.js' %}"></script>

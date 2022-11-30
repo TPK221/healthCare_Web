@@ -6,6 +6,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import User
 from .models import Doctor
+from .models import Appointment
+from .models import AppointmentAdmin
+import time
+from datetime import datetime
 import json
 
 firebaseConfig = {
@@ -17,8 +21,8 @@ firebaseConfig = {
     'messagingSenderId': "229559686647",
     'appId': "1:229559686647:web:a93fd4e466a9f2adb80af2",
     'measurementId': "G-WM3FSPBPDV",
-    'serviceAccount': "C:\\Users\\tript\\Desktop\\University Year 2 Sem 6\\Semester 6 Sept 2022\\Internet & Web Development\\health-care-web-212e0-firebase-adminsdk-nyf5g-9ba2dd4249.json"
-    }
+    'serviceAccount': "C:\\Users\\ben_l\\OneDrive\\Desktop\\Uni Stuff\\Web Development\\health-care-web-212e0-firebase-adminsdk-nyf5g-9ba2dd4249.json"
+}
 
 # Initialize Firebase
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -26,6 +30,7 @@ authenticate = firebase.auth()
 database = firebase.database()
 
 userDetail = User()
+apptDetail = Appointment()
 
 
 def index(request):
@@ -84,8 +89,10 @@ def findadoctor(request):
     allDoctor = []
     specialtyID = []
     for i in lis_doctor:
-        doctorName = database.child('doctors').child(i).child('name').get().val()
-        doctorSpecialty = database.child('doctors').child(i).child('specialty').get().val()
+        doctorName = database.child('doctors').child(
+            i).child('name').get().val()
+        doctorSpecialty = database.child('doctors').child(
+            i).child('specialty').get().val()
         allDoctor.append(doctorName)
         specialtyID.append(doctorSpecialty)
 
@@ -99,13 +106,16 @@ def findadoctor(request):
 
 def specialty(request):
     specialty = request.GET.get('specialtyId')
-    title = request.GET.get('specialty')
     doctors = []
 
     # Get doctor id from db
     doctorID = database.child('specialties').child(
         specialty).child('drId').get().val()
     doctorID = doctorID.split(', ')
+
+    # Get Specialty Title from db
+    title = database.child('specialties').child(
+        specialty).child('title').get().val()
 
     # Find doctor details based on drID
     for id in doctorID:
@@ -123,7 +133,8 @@ def specialty(request):
             gender = "Female"
         doctor.gender = gender
 
-        doctor.qualifications = database.child('doctors').child(id).child('qualifications').get().val()
+        doctor.qualifications = database.child('doctors').child(
+            id).child('qualifications').get().val()
         doctors.append(doctor)
 
     context = {'title': title, 'doctor': doctors, 'usrDetail': userDetail}
@@ -146,6 +157,32 @@ def aboutus(request):
 
 
 def enquiry(request):
+    sendMail = request.GET.get('sendMail')
+    fullName = request.POST.get('name')
+    email = request.POST.get('email')
+    phone = request.POST.get('phone')
+    message = request.POST.get('message')
+
+    if (sendMail == '1'):
+        msg = "[User Detail]\n" \
+            + "Name : " + fullName + "\n" \
+            + "Email: " + email + "\n" \
+            + "Phone Number: " + phone + "\n\n" \
+            + "[Enquiry]\n" \
+            + message
+
+        # Send User Enquiry Email to TYK Medical
+        send_mail(
+            "[Enquiry] from " + fullName,  # Subject
+            msg,  # Message
+            "settings.EMAIL_HOST_USER",  # From Email
+            [settings.EMAIL_HOST_USER],  # To Email
+            fail_silently=False
+        )
+        print("Email Sent to TYK")
+        context = {'usrDetail': userDetail}
+        return render(request, "enquiry.html", context)
+
     context = {'usrDetail': userDetail}
     return render(request, "enquiry.html", context)
 
@@ -168,14 +205,17 @@ def doctorsInformation(request):
         gender = "Female"
     doctor.gender = gender
 
-    doctor.qualifications = database.child('doctors').child(doctorID).child('qualifications').get().val()
-    specialty = database.child('doctors').child(doctorID).child('specialty').get().val()
+    doctor.qualifications = database.child('doctors').child(
+        doctorID).child('qualifications').get().val()
+    specialty = database.child('doctors').child(
+        doctorID).child('specialty').get().val()
     doctor.specialty = assignSpecialty(specialty)
 
     doctor.save()
 
     context = {'usrDetail': userDetail, 'doctor': doctor}
     return render(request, "doctors-information.html", context)
+
 
 def assignSpecialty(id):
     if id == '1':
@@ -215,19 +255,29 @@ def assignSpecialty(id):
 def makeAppointment(request):
     selectDoctor = request.GET.get('dr')
     sendMail = request.GET.get('sendMail')
-    if (sendMail == '1'):
-        dr = request.POST.get('doctors')
-        date_1 = request.POST.get('date1')
-        date_2 = request.POST.get('date2')
-        fullName = request.POST.get('name')
-        email = request.POST.get('email')
+    dr = request.POST.get('doctors')
+    date_1 = str(request.POST.get('date_1'))
+    date_2 = str(request.POST.get('date_2'))
+    time_1 = str(request.POST.get('time_1'))
+    time_2 = str(request.POST.get('time_2'))
+    fullName = request.POST.get('name')
+    email = request.POST.get('email')
+    concern = request.POST.get('message')
+    currentTimeStamp = time.time()
 
-        message = "Dear " + fullName + ",\n\n" \
-            + "Thank you for scheduling your appointment with TYK Medical Centre. You appointment request has been received. We hope to make sure your visit goes smoothly.\n\n" \
-            + "Appointment Request Details: \n" + "Requested Doctor: Dr. " + dr + \
-            "\nDate Option 1: " + date_1 + "\n" + "Date Option 2: " + date_2 + "\n\n" \
-            + "If you require any further information, feel free to email us at tykmedicalcentre@gmail.com.\n\n" + \
-            "Sincerely,\n" + "TYK Medical Centre."
+    if (sendMail == '1'):
+        # Store appointment details under patient to database
+        apptData = {"state": 1, "date": currentTimeStamp, "reqDoctor": dr, "date_1": date_1,
+                    "date_2": date_2, "time_1": time_1, "time_2": time_2, "medicalConcerns": concern, "userID": str(userDetail.userID), "confirmDate": "no"}
+        database.child("patients").child(str(userDetail.userID)
+                                         ).child("appointment").set(apptData)
+
+        # Store under main appointment database
+        database.child("allAppointments").push(apptData)
+   
+        # Send Confirmation Email to User
+        message = "Dear " + fullName + ",\n\n" + "Thank you for scheduling your appointment with TYK Medical Centre. You appointment request has been received. We hope to make sure your visit goes smoothly.\n\n" + "Appointment Request Details: \n" + "Requested Doctor: Dr. " + dr + \
+            "\nDate Option 1: " + date_1 + "\t" + time_1 + "\n" + "Date Option 2: " + date_2 + "\t" + time_2 + "\n\n" + "If you require any further information, feel free to email us at tykmedicalcentre@gmail.com.\n\n" + "Sincerely,\n" + "TYK Medical Centre."
 
         send_mail(
             "[TYK Medical Centre] Received Your Appointment Request",  # Subject
@@ -258,7 +308,7 @@ def makeAppointment(request):
     doctor_list = zip(lis_doctors, doctorName)
 
     context = {'doctorList': doctor_list,
-               'usrDetail': userDetail, 'selectDoctor': selectDoctor}
+               'usrDetail': userDetail, 'selectDoctor': selectDoctor, 'apptDetail': apptDetail}
 
     return render(request, "make-appointment.html", context)
 
@@ -316,17 +366,19 @@ def postLogin(request):
     usr_id = usr_id['localId']
 
     # Store user data to User Class
+    userDetail.userID = usr_id
     userDetail.name = database.child('patients').child(
         usr_id).child('details').child('name').get(idtoken).val()
     userDetail.email = database.child('patients').child(
         usr_id).child('details').child('email').get(idtoken).val()
     userDetail.phone = database.child('patients').child(
         usr_id).child('details').child('phoneNum').get(idtoken).val()
+
     userDetail.gender = database.child('patients').child(
         usr_id).child('details').child('gender').get(idtoken).val()
+
     userDetail.dob = database.child('patients').child(
         usr_id).child('details').child('dob').get(idtoken).val()
-
     userDetail.save()
 
     context = {'usrDetail': userDetail}
@@ -340,6 +392,188 @@ def logout(request):
         pass
     return render(request, "index.html")
 
+
 def patientsProfile(request):
-    context = {'usrDetail': userDetail}
+    uid = str(userDetail.userID)
+    cancelAppt = request.GET.get('cancel')
+
+    if (str(userDetail.gender) == '1'):
+        gender = "Male"
+    else:
+        gender = "Female"
+
+    context = {'usrDetail': userDetail, "patientGender": gender}
+
+    if (cancelAppt == '1'):
+        target = ""
+        timeStamp = str(database.child("patients").child(uid).child('appointment').child('date').get().val())
+        tstamp = database.child('allAppointments').shallow().get().val()
+        lis_stamp = []
+        for j in tstamp:
+            lis_stamp.append(j)
+        for k in lis_stamp:
+            keyID = str(database.child("allAppointments").child(k).child('date').get().val())
+            if (keyID == timeStamp):
+                target = k
+        database.child("patients").child(uid).child('appointment').remove()
+        database.child("allAppointments").child(target).remove()
+
+        apptDetail.delete()
+        context = {'usrDetail': userDetail, "patientGender": gender}
+        return render(request, "patients-profile.html", context)
+    else:
+        # Store user appointment details to Appointment Class
+        if database.child('patients').child(uid).child('appointment').shallow().get().val():
+            date = database.child('patients').child(uid).child(
+                'appointment').child('date').get().val()
+            convertDate = datetime.fromtimestamp(
+                date).strftime('%Y-%m-%d, %I:%M %p')
+            apptDetail.date = str(convertDate)
+
+            state = database.child('patients').child(
+                uid).child('appointment').child('state').get().val()
+            if (state == 1):
+                apptDetail.state = "Pending Confirmation"
+            elif (state == 2):
+                apptDetail.state = "Appointment Confirmed"
+            else:
+                apptDetail.state = "Appointment Declined"
+
+            apptDetail.reqDoctor = database.child('patients').child(
+                uid).child('appointment').child('reqDoctor').get().val()
+            apptDetail.date_1 = database.child('patients').child(
+                uid).child('appointment').child('date_1').get().val()
+            apptDetail.date_2 = database.child('patients').child(
+                uid).child('appointment').child('date_2').get().val()
+            apptDetail.time_1 = database.child('patients').child(
+                uid).child('appointment').child('time_1').get().val()
+            apptDetail.time_2 = database.child('patients').child(
+                uid).child('appointment').child('time_2').get().val()
+            apptDetail.concern = database.child('patients').child(uid).child(
+                'appointment').child('medicalConcerns').get().val()
+            apptDetail.confirmDate = database.child('patients').child(uid).child(
+                'appointment').child('confirmDate').get().val()
+            apptDetail.save()
+            context = {'usrDetail': userDetail, 'apptDetail': apptDetail, "patientGender": gender}
+
     return render(request, "patients-profile.html", context)
+
+
+def adminPage(request):
+    context = {}
+    patientID = request.GET.get('patientID')
+
+    state = request.GET.get('state')
+    apptID = request.GET.get('apptID')
+    confirmDate = request.GET.get('confirmDate')
+    if (str(state) == '2'):
+        database.child("allAppointments").child(apptID).update({"state": 2, "confirmDate": confirmDate})
+        
+        timeStamp = str(database.child("allAppointments").child(apptID).child('date').get().val())
+        tstamp = database.child('patients').shallow().get().val()
+        lis_patient = []
+        for j in tstamp:
+            lis_patient.append(j)
+        for k in lis_patient:
+            keyID = str(database.child("patients").child(k).child('appointment').child('date').get().val())
+            if (keyID == timeStamp):
+                database.child("patients").child(k).child('appointment').update({"state": 2, "confirmDate": confirmDate})
+                
+
+    # Retrieve all appointment requests from database
+    if database.child('allAppointments').shallow().get().val():
+
+        appointments = database.child('allAppointments').shallow().get().val()
+
+        # Store retrieved appt id to an array variable
+        lis_appt = []
+        for i in appointments:
+            lis_appt.append(i)
+
+        # Retrieve appt detail from database
+        appt = []
+        for i in lis_appt:
+            apptAll = AppointmentAdmin()
+
+            apptAll.apptID = i
+
+            patientID = database.child('allAppointments').child(i).child('userID').get().val()
+            apptAll.patientID = patientID
+    
+
+            timeStamp = str(database.child("patients").child(patientID).child('appointment').child('date').get().val())
+            tstamp = database.child('allAppointments').shallow().get().val()
+            lis_stamp = []
+            for j in tstamp:
+                lis_stamp.append(j)
+            for k in lis_stamp:
+                keyID = str(database.child("allAppointments").child(k).child('date').get().val())
+                if (keyID == timeStamp):
+                    target = k
+
+
+            date = database.child('allAppointments').child(
+                i).child('date').get().val()
+            convertDate = datetime.fromtimestamp(
+                date).strftime('%Y-%m-%d, %I:%M %p')
+            apptAll.apptDate = str(convertDate)
+
+            state = database.child('allAppointments').child(
+                i).child('state').get().val()
+            if (str(state) == '1'):
+                apptAll.apptStatus = "Pending Confirmation"
+            elif (str(state) == '2'):
+                apptAll.apptStatus = "Appointment Confirmed"
+
+            apptAll.reqDoctor = database.child('allAppointments').child(
+                i).child('reqDoctor').get().val()
+
+            date1 = str(database.child('allAppointments').child(i).child('date_1').get().val(
+            )) + ", " + str(database.child('allAppointments').child(i).child('time_1').get().val())
+            date2 = str(database.child('allAppointments').child(i).child('date_2').get().val(
+            )) + ", " + str(database.child('allAppointments').child(i).child('time_2').get().val())
+            apptAll.date1 = date1
+            apptAll.date2 = date2
+
+            apptAll.patientName = database.child('patients').child(patientID).child('details').child('name').get().val()
+            apptAll.patientContact = database.child('patients').child(patientID).child('details').child('phoneNum').get().val()
+
+            apptAll.save()
+            appt.append(apptAll)
+        context = {'appt': appt}
+    
+    return render(request, "adminPage.html", context)
+
+
+def adminPageDetail(request):
+    apptDetail = AppointmentAdmin()
+    apptID = request.GET.get('apptID')
+    apptDetail.apptID = apptID
+    patientID = database.child('allAppointments').child(apptID).child('userID').get().val()
+
+    date = database.child('allAppointments').child(apptID).child('date').get().val()
+    convertDate = datetime.fromtimestamp(date).strftime('%Y-%m-%d, %I:%M %p')
+    apptDetail.apptDate = str(convertDate)
+
+    state = database.child('allAppointments').child(apptID).child('state').get().val()
+    if (str(state) == '1'):
+        apptDetail.apptStatus = "Pending Confirmation"
+    elif (str(state) == '2'):
+        apptDetail.apptStatus = "Appointment Confirmed"
+
+    apptDetail.reqDoctor = database.child('allAppointments').child(apptID).child('reqDoctor').get().val()
+    apptDetail.confirmDate = database.child('allAppointments').child(apptID).child('confirmDate').get().val()
+
+    date1 = str(database.child('allAppointments').child(apptID).child('date_1').get().val()) + ", " + str(database.child('allAppointments').child(apptID).child('time_1').get().val())
+    date2 = str(database.child('allAppointments').child(apptID).child('date_2').get().val()) + ", " + str(database.child('allAppointments').child(apptID).child('time_2').get().val())
+    apptDetail.date1 = date1
+    apptDetail.date2 = date2
+
+    apptDetail.patientName = database.child('patients').child(patientID).child('details').child('name').get().val()
+    apptDetail.patientContact = database.child('patients').child(patientID).child('details').child('phoneNum').get().val()
+
+    apptDetail.save()
+
+    context = {'appt': apptDetail, "patientID": patientID}
+
+    return render(request, "adminPage-detail.html", context)

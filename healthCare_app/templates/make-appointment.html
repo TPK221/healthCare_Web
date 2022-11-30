@@ -45,8 +45,22 @@
   <link href="{% static 'css/chat.css' %}" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+  <!--Date Picker CSS-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!--Pick a Date CSS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.time.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/legacy.js"></script>
+  <link rel="stylesheet" href="https://common.olemiss.edu/_js/pickadate.js-3.5.3/lib/themes/classic.css"
+    id="theme_base">
+  <link rel="stylesheet" href="https://common.olemiss.edu/_js/pickadate.js-3.5.3/lib/themes/classic.date.css"
+    id="theme_date">
+  <link rel="stylesheet" href="https://common.olemiss.edu/_js/pickadate.js-3.5.3/lib/themes/classic.time.css"
+    id="theme_time">
 </head>
 
 <style data-tag="reset-style-sheet">
@@ -163,6 +177,7 @@
 <body>
 
   <div class="body-container">
+
     <!-- Navigation Bar -->
     <nav>
       <div class="navbar-logo">
@@ -186,9 +201,10 @@
         <li><a href="{% url 'healthcare-blog' %}" class="navbar-text">Healthcare Blog</a></li>
 
         {% if 'uid' in request.session %}
+
         <li>
           <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-          <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+          <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
           <input type="checkbox" id="btn-1" class="checkBtn">
           <ul>
             <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -241,15 +257,31 @@
             </select>
           </div>
 
+          <!-- Date Option 1 -->
           <div class="select-date-container py-4">
             <div>
               <label for="date_1" class="input-label">DATE OPTION 1 (REQURIED)</label><br>
-              <input type="date" placeholder="Select a Date" id="date_1" class="info-appointment" name="date1">
-            </div>  
+              <input type="text" placeholder="Select a Date" id="date_1" class="info-appointment datepicker"
+                name="date_1">
+            </div>
 
             <div>
+              <label for="time_1" class="input-label">TIME (REQUIRED)</label><br>
+              <input type="text" placeholder="Select Time" id="time_1" class="info-appointment timepicker" name="time_1">
+            </div>
+          </div>
+          
+          <!-- Date Option 2 -->
+          <div class="select-date-container py-4">
+            <div>
               <label for="date_2" class="input-label">DATE OPTION 2 (REQURIED)</label><br>
-              <input type="date" placeholder="Select a Date" id="date_2" class="info-appointment" name="date2">
+              <input type="text" placeholder="Select a Date" id="date_2" class="info-appointment datepicker"
+                name="date_2">
+            </div>
+
+            <div>
+              <label for="time_2" class="input-label">TIME (REQUIRED)</label><br>
+              <input type="text" placeholder="Select Time" id="time_2" class="info-appointment timepicker" name="time_2">
             </div>
           </div>
 
@@ -414,13 +446,77 @@
 
   </div>
 
+  <!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <button id="chat-button" type="button" class="collapsible">Chat with us!
+      <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+    </button>
+
+    <div class="content">
+      <div class="full-chat-block">
+        <!-- Message Container -->
+        <div class="outer-container">
+          <div class="chat-container">
+            <!-- Messages -->
+            <div id="chatbox">
+              <h5 id="chat-timestamp"></h5>
+              <br>
+              <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+              <br>
+            </div>
+
+            <!-- User input box -->
+            <div class="chat-bar-input-block">
+              <div id="userInput">
+                <input id="textInput" class="input-box" type="text" name="msg"
+                  placeholder="Click 'Enter' to send a message">
+                <p></p>
+              </div>
+
+              <div class="chat-bar-icons">
+
+                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+              </div>
+            </div>
+
+            <div id="chat-bar-bottom">
+              <p></p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
   <script>
     var sendMail = 0;
 
-    flatpickr("input[type=date", {
-      minDate: "today",
-      maxDate: new Date().fp_incr(14),
-    });
+    $('.datepicker').pickadate({
+      formatSubmit: 'yyyy-mm-dd',
+      selectMonths: true,
+      selectYears: true,
+      min: 3,
+      max: 14,
+      hiddenName: true,
+    })
+
+    $('.timepicker').pickatime({
+      formatSubmit: 'hh:i A',
+      hiddenName: true,
+      interval: 45,
+      disable: [
+        true,
+        [9, 0],
+        [9, 45],
+        [10, 30],
+        [11, 15],
+        [14, 15],
+        [15, 0]
+      ]
+    })
 
     flatpickr("#dob", {});
 
@@ -431,10 +527,24 @@
       $('#step_1').addClass("order-selected");
     });
 
+    // Check if user is logged in
+    $('input, select').click(function () {
+      if (localStorage.getItem('status') != "loggedIn") {
+        var text = "Please Log In before Making an Appointment.\nor\nPress OK to Register a New Account."
+        if (confirm(text) == true) {
+          window.location.href="{% url 'register' %}";
+        } else {
+          window.location.href="{% url 'index' %}";
+        }
+      }
+    });
+
     function next() {
       var drID = $('#doctors option:selected').text();
       var date_1 = $('#date_1').val();
       var date_2 = $('#date_2').val();
+      var time_1 = $('#time_1').val();
+      var time_2 = $('#time_2').val();
       var msg = $('#message').val();
 
       if (drID == "Select a Doctor") {
@@ -448,6 +558,14 @@
       else if (!date_2) {
         alert("You must Select Date Option 2.");
         $('#date_2').focus();
+      }
+      else if (!time_1) {
+        alert("You must Select Time for Option 1.");
+        $('#time_1').focus();
+      }
+      else if (!time_2) {
+        alert("You must Select Time for Option 2.");
+        $('#time_2').focus();
       }
       else if (date_1 == date_2) {
         alert("(Date Option 1) & (Date Option 2) must not be same.")
@@ -497,69 +615,23 @@
         return true;
       return false;
     }
-  
-    var btnTop = document.getElementById('btnTop');
-    window.onscroll = function() {scrollFunction()};
 
-    function scrollFunction (){
-      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500){
+    var btnTop = document.getElementById('btnTop');
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
         btnTop.style.display = 'block';
       } else {
         btnTop.style.display = 'none';
       }
     }
 
-    btnTop.addEventListener('click', ()=>{
+    btnTop.addEventListener('click', () => {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
   </script>
-
-   <!-- CHAT BAR BLOCK -->
-   <div class="chat-bar-collapsible">
-    <button id="chat-button" type="button" class="collapsible">Chat with us!
-        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
-    </button>
-
-    <div class="content">
-        <div class="full-chat-block">
-            <!-- Message Container -->
-            <div class="outer-container">
-                <div class="chat-container">
-                    <!-- Messages -->
-                    <div id="chatbox">
-                        <h5 id="chat-timestamp"></h5>
-                        <br>
-                        <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                        <br>
-                    </div>
-
-                    <!-- User input box -->
-                    <div class="chat-bar-input-block">
-                        <div id="userInput">
-                            <input id="textInput" class="input-box" type="text" name="msg"
-                                placeholder="Click 'Enter' to send a message">
-                            <p></p>
-                        </div>
-
-                        <div class="chat-bar-icons">
-
-                            <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-                                onclick="sendButton()"></i>
-                        </div>
-                    </div>
-
-                    <div id="chat-bar-bottom">
-                        <p></p>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-  </div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -130,9 +130,12 @@
     href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&amp;display=swap"
     data-tag="font" />
 
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <!-- Fontawesome 5.11.2 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-  
+
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
   <link href="{% static 'css/patients-profile.css' %}" rel="stylesheet" />
   <!--Header CSS-->
@@ -142,7 +145,6 @@
 </head>
 
 <body>
-
   <div class="patients-profile-container">
 
     <!-- Navigation Bar -->
@@ -170,7 +172,7 @@
         {% if 'uid' in request.session %}
         <li>
           <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-          <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+          <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
           <input type="checkbox" id="btn-1" class="checkBtn">
           <ul>
             <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -194,51 +196,87 @@
       </div>
     </div>
 
-    <h1 class="patients-profile-text08">Patient's Personal Information</h1>
-
-    <div class="patients-profile-container02">
-      <span class="patients-profile-text09">
-        <span>Full Name:</span>
+    <!-- Patient Detail -->
+    <div class="patients-profile-container03" id="patient_dtl">
+      <h1 class="patients-profile-text25">Patient's Personal Information</h1>
+      <div class="patients-profile-text09">
+        <br />
+        <span class="patient-detail">Full Name</span><span>:&emsp;{{usrDetail.name}}</span></span>
         <br />
         <br />
-        <span>Email:</span>
+        <span class="patient-detail">Email</span><span>:&emsp;{{usrDetail.email}}</span></span>
         <br />
         <br />
-        <span>Phone Number:</span>
+        <span class="patient-detail">Phone Number</span><span>:&emsp;{{usrDetail.phone}}</span></span>
         <br />
         <br />
-        <span>Date of Birth:</span>
+        <span class="patient-detail">Date of Birth</span><span>:&emsp;{{usrDetail.dob}}</span></span>
         <br />
         <br />
-        <span>Gender:</span>
+        <span class="patient-detail">Gender</span><span>:&emsp;{{patientGender}}</span></span>
         <br />
         <br />
-      </span>
+      </div>
     </div>
 
-    <h1 class="patients-profile-text25">Appointment Details</h1>
+    <!-- Upcoming Appointment -->
+    <div class="patients-profile-container03" id="appointment_dtl">
+      <h1 class="patients-profile-text25">Upcoming Appointment</h1>
 
-    <div class="patients-profile-container03">
-      <span class="patients-profile-text26">
-        <span>Date:</span>
+      {% if apptDetail.date %}
+      <div class="patients-profile-text09">
+        <br />
+        <span class="appt-detail">Submitted Date</span><span>:&emsp;{{apptDetail.date}}</span></span>
         <br />
         <br />
-        <span>Requested Appointment With:</span>
+        <span class="appt-detail">Status</span><span>:&emsp;{{apptDetail.state}}</span></span>
         <br />
         <br />
-        <span>Date Option 1:</span>
+        <span class="appt-detail">Requested With</span><span>:&emsp;Dr.
+          {{apptDetail.reqDoctor}}</span></span>
         <br />
         <br />
-        <span>Date Option 2:</span>
+
+        {% if apptDetail.confirmDate == "no" %}
+        <span class="appt-detail">Date Option 1</span><span>:&emsp;{{apptDetail.date_1}},
+          {{apptDetail.time_1}}</span></span>
         <br />
         <br />
-        <span>Medical Concerns:</span>
+        <span class="appt-detail">Date Option 2</span><span>:&emsp;{{apptDetail.date_2}},
+          {{apptDetail.time_2}}</span></span>
         <br />
-      </span>
-      <button class="patients-profile-button2 button-secondary button">
-        Cancel Appointment
-      </button>
+        <br />
+        {% else %}
+        <span class="appt-detail">Confirmed Date</span><span>:&emsp;{{apptDetail.confirmDate}}</span></span>
+        <br />
+        <br />
+        {% endif %}
+        
+        <span class="appt-detail">Medical Concerns</span><span>:&emsp;{{apptDetail.concern}}</span></span>
+        <br />
+        <br />
+      </div>
+
+      <div class="button-cancel">
+        <button type="button" class="patients-profile-button2 button-secondary button" id="cancelAppt">Cancel
+          Appointment Request</button>
+      </div>
+      {% else %}
+      <div id="no_appointment" style="text-align: center; padding: 100px;">
+        <span>No Upcoming Appointment</span>
+      </div>
+
+      <div class="button-cancel">
+        <button type="button" class="patients-profile-button2 button-secondary button" id="makeAppt">Request
+          Appointment</button>
+      </div>
+      {% endif %}
     </div>
+
+    <!-- History Appointment -->
+    <!-- <div class="patients-profile-container03" id="appointment_dtl">
+      <h1 class="patients-profile-text25">History Appointments</h1>
+    </div> -->
 
     <!-- Footer -->
     <footer class="footer-container">
@@ -344,6 +382,19 @@
       listenForUrlChanges()
       runAllScripts()
     }
+
+    $('#cancelAppt').click(function () {
+      var text = "Confirm to Cancel Appointment?\n\nPress OK to Confirm / Cancel to Exit."
+      if (confirm(text) == true) {
+        window.location.href = "{% url 'patients-profile' %}?cancel=1";
+        location.reload = "{% url 'patients-profile' %}"
+        alert("Appointment Cancelled.")
+      }
+    });
+
+    $('#makeAppt').click(function () {
+      window.location.href = "{% url 'make-appointment' %}";
+    });
   </script>
 </body>
 

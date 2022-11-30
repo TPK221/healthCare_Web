@@ -103,6 +103,7 @@
       scroll-behavior: smooth
     }
   </style>
+
   <style data-tag="default-style-sheet">
     html {
       font-family: Titillium Web;
@@ -147,6 +148,7 @@
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
+<!-- Auto Complete CSS -->
 <style>
   /*the container must be positioned relative:*/
   .autocomplete {
@@ -160,6 +162,7 @@
     border-bottom: none;
     border-top: none;
     z-index: 99;
+
     /*position the autocomplete items to be the same width as the container:*/
     height: auto;
     max-height: 300px;
@@ -185,6 +188,7 @@
   <div>
     <div class="find-a-doctor-container">
 
+      <!-- Navigation Bar -->
       <nav>
         <div class="navbar-logo">
           <img alt="image" src="{% static 'public/playground_assets/group_2.svg' %}" class="navbar-image" />
@@ -209,7 +213,7 @@
           {% if 'uid' in request.session %}
           <li>
             <label for="btn-1" class="show">{{ usrDetail.name }}</label>
-            <a href="#" class="btn-register">{{ usrDetail.name }}</a>
+            <a href="{% url 'patients-profile' %}" class="btn-register">{{ usrDetail.name }}</a>
             <input type="checkbox" id="btn-1" class="checkBtn">
             <ul>
               <li btn-logout><a href="{% url 'logout' %}" class="navbar-text-1">Log Out</a></li>
@@ -254,7 +258,7 @@
           {% for specialtyList, title, imgUrl in combineList_2 %}
           <div class="find-a-doctor-feature-card">
             <h2 class="find-a-doctor-text">
-              <a href="{% url 'specialty' %}?specialtyId={{specialtyList}}&specialty={{title}}">{{ title }}</a>
+              <a href="{% url 'specialty' %}?specialtyId={{specialtyList}}">{{title}}</a>
             </h2>
             <img alt="image" src={{ imgUrl }} class="find-a-doctor-image" />
           </div>
