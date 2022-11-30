@@ -17,6 +17,7 @@ class Doctor(models.Model):
     gender = models.CharField(max_length=1)
     qualifications = models.TextField()
     specialty = models.CharField(max_length=10, default='')
+    imgurl = models.CharField(max_length=1000, default='')
 
 
 class Appointment(models.Model):

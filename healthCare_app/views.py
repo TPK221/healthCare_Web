@@ -121,6 +121,8 @@ def specialty(request):
     for id in doctorID:
         doctor = Doctor()
         doctor.drID = id
+        doctor.imgurl = database.child('doctors').child(
+            id).child('imgurl').get().val()
         doctor.name = database.child('doctors').child(
             id).child('name').get().val()
         doctor.languages = database.child('doctors').child(
@@ -193,6 +195,8 @@ def doctorsInformation(request):
     # Get doctor information from databse based on id
     doctor = Doctor()
     doctor.drID = id
+    doctor.imgurl = database.child('doctors').child(
+        doctorID).child('imgurl').get().val()
     doctor.name = database.child('doctors').child(
         doctorID).child('name').get().val()
     doctor.languages = database.child('doctors').child(
